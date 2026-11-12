@@ -1,0 +1,122 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        ".validate": "newData.hasChildren(['email', 'name'])",
+        "email": {
+          ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 254"
+        },
+        "name": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 40"
+        },
+        "about": {
+          ".validate": "newData.isString() && newData.val().length <= 140"
+        },
+        "picture": {
+          ".validate": "newData.isString() && newData.val().length <= 100000"
+        },
+        "pass": {
+          ".validate": "newData.isString() && newData.val().length <= 300"
+        },
+        "ready": {
+          ".validate": "newData.isBoolean()"
+        },
+        "custom": {
+          ".validate": "newData.isBoolean()"
+        },
+        "banned": {
+          ".validate": "newData.isBoolean()"
+        },
+        "created": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "messages": {
+      ".indexOn": [
+        "ts"
+      ],
+      "$id": {
+        ".validate": "newData.hasChildren(['id', 'from', 'to', 'text', 'ts'])",
+        "id": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 64"
+        },
+        "from": {
+          ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 254"
+        },
+        "to": {
+          ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 254"
+        },
+        "text": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 2000"
+        },
+        "ts": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "calls": {
+      ".indexOn": [
+        "ts"
+      ],
+      "$id": {
+        ".validate": "newData.hasChildren(['id', 'from', 'to', 'ts', 'status'])",
+        "id": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 64"
+        },
+        "from": {
+          ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 254"
+        },
+        "to": {
+          ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 254"
+        },
+        "video": {
+          ".validate": "newData.isBoolean()"
+        },
+        "ts": {
+          ".validate": "newData.isNumber()"
+        },
+        "status": {
+          ".validate": "newData.isString() && (newData.val() == 'ringing' || newData.val() == 'answered' || newData.val() == 'declined' || newData.val() == 'missed')"
+        },
+        "duration": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "reads": {
+      "$uid": {
+        "$peer": {
+          ".validate": "newData.isNumber()"
+        }
+      }
+    },
+    "subs": {
+      "$uid": {
+        "$i": {
+          ".validate": "newData.hasChildren(['endpoint', 'keys'])",
+          "endpoint": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 2000"
+          },
+          "keys": {
+            ".validate": "newData.hasChildren(['p256dh', 'auth'])"
+          },
+          "expirationTime": {
+            ".validate": true
+          }
+        }
+      }
+    }
+  }
+}
